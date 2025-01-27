@@ -60,7 +60,6 @@ h3 {
   font-weight: 500;
   font-size: 20px;
   line-height: 1.2;
-  /* letter-spacing: 0.02em; */
   color: #2e2f42;
 }
 
@@ -78,6 +77,8 @@ address {
 
 .page-header {
   border-bottom: 1px solid #e7e9fc;
+  box-shadow: 0 1px 6px 0 rgba(46, 47, 66, 0.08),
+    0 1px 1px 0 rgba(46, 47, 66, 0.16), 0 2px 1px 0 rgba(46, 47, 66, 0.08);
 }
 
 .header-container {
@@ -126,8 +127,26 @@ address {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: #2e2f42;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.nav-link.current {
+  position: relative;
+}
+
+.nav-link.current::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+
+  background-color: #404bbf;
+}
 .contacts {
   margin-left: auto;
 }
@@ -143,12 +162,14 @@ address {
   padding: 24px 0;
   line-height: 1.5;
   color: #434455;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link:hover,
 .contacts-link:hover,
 .nav-link:focus,
-.contacts-link:focus {
+.contacts-link:focus,
+.nav-link.current {
   color: #404bbf;
 }
 
@@ -158,6 +179,14 @@ address {
   background-color: #2e2f42;
   padding-top: 188px;
   padding-bottom: 188px;
+  background-image: linear-gradient(
+      rgba(46, 47, 66, 0.7),
+      rgba(46, 47, 66, 0.7)
+    ),
+    url(../images/people-office.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .main-header {
@@ -200,10 +229,6 @@ address {
   padding-bottom: 120px;
 }
 
-.features-text {
-  color: #434455;
-}
-
 .features-list {
   display: flex;
   gap: 24px;
@@ -212,8 +237,26 @@ address {
   width: calc((100% - 24px * 3) / 4);
 }
 
+.f-icon-container {
+  background-color: #f4f4fd;
+  border: 1px solid #8e8f99;
+  border-radius: 4px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  margin-bottom: 8px;
+}
+
+.features-icon {
+  display: block;
+  margin: 0 auto;
+}
+
 .features-name {
   margin-bottom: 8px;
+}
+
+.features-text {
+  color: #434455;
 }
 
 /* Section Team */
@@ -239,13 +282,41 @@ address {
 }
 
 .team-item-label {
-  padding: 32px 0 32px;
+  padding: 32px 16px;
   text-align: center;
 }
 
 .team-name {
   margin-bottom: 8px;
 }
+
+.team-text {
+  margin-bottom: 8px;
+}
+
+.team-soc {
+  display: flex;
+  justify-content: space-between;
+}
+
+.soc-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #4d5ae5;
+  padding: 12px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.soc-item:hover {
+  background-color: #404bbf;
+}
+
+.soc-icon {
+  display: block;
+  fill: #fff;
+}
+
 /* Section Portfolio */
 
 .portfolio {
@@ -266,6 +337,38 @@ address {
 
 .portfolio-item {
   width: calc((100% - 2 * 24px) / 3);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-image-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 40px;
+  padding-left: 32px;
+  padding-right: 32px;
+  background-color: #4d5ae5;
+  height: 100%;
+  color: #f4f4fd;
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: auto;
+}
+
+.portfolio-item:hover {
+  box-shadow: 0 2px 1px 0 rgba(46, 47, 66, 0.08),
+    0 1px 1px 0 rgba(46, 47, 66, 0.16), 0 1px 6px 0 rgba(46, 47, 66, 0.08);
+}
+.portfolio-item:hover .portfolio-image-cover {
+  transform: translateY(0);
+}
+
+.portfolio-item:hover .portfolio-image-cover {
 }
 
 .portfolio-item-label {
@@ -287,6 +390,11 @@ address {
   padding-bottom: 100px;
 }
 
+.container-footer {
+  display: flex;
+  gap: 120px;
+}
+
 .footer-logo {
   display: inline-block;
   margin-bottom: 16px;
@@ -294,4 +402,27 @@ address {
 .footer-text {
   color: #f4f4fd;
   max-width: 264px;
+}
+.footer-soc {
+  display: flex;
+  justify-content: left;
+  gap: 16px;
+}
+
+.footer-soc-title {
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.footer-soc .soc-item {
+  padding: 8px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-soc .soc-item:hover,
+.footer-soc .soc-item:hover .soc-icon {
+  background-color: #31d0aa;
+  fill: #f4f4fd;
 }
